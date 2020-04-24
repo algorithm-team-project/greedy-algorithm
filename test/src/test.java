@@ -5,24 +5,30 @@ import javax.swing.event.ChangeListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
+import java.util.Arrays;
 
 
 public class test extends JFrame {
 
     Container ct = getContentPane();
 
-    JPanel top = new JPanel(new GridLayout(1,1,10,10)); // 금액 입력 받는 상단 panel
+    JPanel top = new JPanel(new GridLayout(1,1,10,10));
     JLabel lb = new JLabel(" 금액 투입 " ,JLabel.CENTER);
     JButton input = new JButton("입 력");
     JTextField jtf1 = new JTextField();
+    int sum;
+    int change;
+    String textFieldValue;
+    int Change;
 
-    JPanel mid = new JPanel(); // 상품 보여 주는 중간 panel
+
+    JPanel mid = new JPanel();
     JButton pd[] = new JButton[4];
     int price[] ={ 800,1300,900,1000};
 
-    JPanel bot = new JPanel(); // 수량 입력 하는 하단 panel
+    JPanel bot = new JPanel();
 
-    JSpinner spinner; // 수량 입력 받는 스피너 생성
+    JSpinner spinner;
     SpinnerNumberModel value1 = new SpinnerNumberModel(0,0,10,1);
     SpinnerNumberModel value2 = new SpinnerNumberModel(0,0,10,1);
     SpinnerNumberModel value3 = new SpinnerNumberModel(0,0,10,1);
@@ -32,14 +38,17 @@ public class test extends JFrame {
     JSpinner spin3 = new JSpinner(value3);
     JSpinner spin4 = new JSpinner(value4);
 
-    JButton cal = new JButton("계 산");
+
+    JButton order = new JButton("주 문");
+    JButton cal = new JButton("잔 돈");
+
 
 
 
     public test(){
 
         setTitle("자판기");
-        setSize(500,500);
+        setSize(550,500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         setLocationRelativeTo(null);
@@ -66,13 +75,15 @@ public class test extends JFrame {
         input.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                String textFieldValue = jtf1.getText();
             }
         }); // 입력 버튼 동작
+
 
         mid.setSize(400,200);
         mid.setLocation(60,40);
         mid.setBackground(Color.white);
+
 
         pd[0] = new JButton(new ImageIcon("src/images/coffee.png"));
         pd[1] = new JButton(new ImageIcon("src/images/cola.png"));
@@ -85,7 +96,6 @@ public class test extends JFrame {
             pd[i].setBackground(Color.white);
             mid.add(pd[i]);
             mid.add(new JLabel(price[i]+"원"));
-
         }
 
 
@@ -96,6 +106,7 @@ public class test extends JFrame {
         spin2.setPreferredSize(new Dimension(40, 40));
         spin3.setPreferredSize(new Dimension(40, 40));
         spin4.setPreferredSize(new Dimension(40, 40));
+        order.setPreferredSize(new Dimension(80, 40));
         cal.setPreferredSize(new Dimension(80, 40));
 
 
@@ -116,21 +127,46 @@ public class test extends JFrame {
         jl4.setFont(f);
         bot.add(jl4); bot.add(spin4);
 
+        bot.add(order);
         bot.add(cal);
+        order.setFont(f);
         cal.setFont(f);
 
-        // 스피너 인자값 받아 오기
-        Object count1 = spin1.getModel().getValue();
-        Object count2 = spin2.getModel().getValue();
-        Object count3 = spin3.getModel().getValue();
-        Object count4 = spin4.getModel().getValue();
+
+
+        int[] oj= new int[4];
+        Arrays.fill(oj, 0);
+
+        oj[0] = Integer.parseInt(spin1.getModel().getValue().toString());
+        oj[1] = Integer.parseInt(spin2.getModel().getValue().toString());
+        oj[2] = Integer.parseInt(spin3.getModel().getValue().toString());
+        oj[3] = Integer.parseInt(spin4.getModel().getValue().toString());
+
+
+        order.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                for(int i=0; i< pd.length ;i++)
+                {
+
+                    if(oj[i]!=0)
+                    {
+                        oj[i]= oj[i] * price[i];
+                        sum = sum + oj[i];
+                    }
+                }
+
+                Change= Integer.parseInt(textFieldValue) - sum;
+            }
+        }); //주문 버튼 동작
 
         cal.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
             }
-        }); //계산 버튼 동작
+        });// 잔돈 버튼 동작
 
 
         ct.add(top,BorderLayout.NORTH);
