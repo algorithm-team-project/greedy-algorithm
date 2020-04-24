@@ -32,6 +32,7 @@ public class test extends JFrame {
     JSpinner spin3 = new JSpinner(value3);
     JSpinner spin4 = new JSpinner(value4);
 
+    JButton order = new JButton("주 문");
     JButton cal = new JButton("계 산");
 
 
@@ -96,6 +97,8 @@ public class test extends JFrame {
         spin2.setPreferredSize(new Dimension(40, 40));
         spin3.setPreferredSize(new Dimension(40, 40));
         spin4.setPreferredSize(new Dimension(40, 40));
+        order.setPreferredSize(new Dimension(80, 40));
+
         cal.setPreferredSize(new Dimension(80, 40));
 
 
@@ -116,7 +119,9 @@ public class test extends JFrame {
         jl4.setFont(f);
         bot.add(jl4); bot.add(spin4);
 
+        bot.add(order);
         bot.add(cal);
+        order.setFont(f);
         cal.setFont(f);
 
         // 스피너 인자값 받아 오기
@@ -125,12 +130,19 @@ public class test extends JFrame {
         Object count3 = spin3.getModel().getValue();
         Object count4 = spin4.getModel().getValue();
 
+        order.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        }); //주문 버튼 동작
+
         cal.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
             }
-        }); //계산 버튼 동작
+        }); //잔돈 버튼 동작
 
 
         ct.add(top,BorderLayout.NORTH);
