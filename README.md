@@ -59,4 +59,19 @@
 #### 5. frame2 : 거스름돈을 보여주는 frame 틀
    - JLabel과 JButton을 포함한 mj JPanel을 frame 틀에 추가
 
-### 4. 디자인
+### 4. 구현 이미지
+
+#### 1. 메인 화면
+![실행화면1](https://user-images.githubusercontent.com/63060298/80197087-23429980-8659-11ea-873f-5bd507457a6b.png)
+#### 2. 입력 금액 부족 알림
+![입력금액 부족](https://user-images.githubusercontent.com/63060298/80197119-2b023e00-8659-11ea-8692-671de74413dd.png)
+#### 3. 돈 부족 알림
+![돈 부족 화면](https://user-images.githubusercontent.com/63060298/80197164-3c4b4a80-8659-11ea-93e6-0f1d89c1c79b.png)
+#### 4. 주문 완료 알림
+![주문 완료](https://user-images.githubusercontent.com/63060298/80197150-36ee0000-8659-11ea-881f-50ab7ceaf8d5.png)
+#### 5. 계산 -> 잔돈 알림
+![계산 실행](https://user-images.githubusercontent.com/63060298/80197371-7fa5b900-8659-11ea-93f3-bedd50ce49a4.png)
+
+
+
+
