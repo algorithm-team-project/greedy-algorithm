@@ -17,11 +17,18 @@
 3. Jpanel bot : 상품 수량 입력 하는 부분
     - bot.add(jl1); // 상품 명 JLabel
     - bot.add(spin1); // 해당 상품 스피너로 수량 입력 받기
-    - bot.add(cal); // 수량 입력 받아서 전체 금액 "계산" 버튼
+    - bot.add(order); // 수량 계산 실행하는 "주문" 버튼
+    - bot.add(cal); // 잔돈 계산 실행하는 "잔돈" 버튼
 
 4. Container ct : 전체 틀
    - top, mid, bot panel 을 전체 틀에 배치
+   
+
+### 2. 입력 , 주문 버튼 동작
   
 
 
+### 3. 잔돈 버튼 동작
 
+
+### 4. 디자인
