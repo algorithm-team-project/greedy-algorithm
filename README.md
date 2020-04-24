@@ -25,7 +25,15 @@
    
 
 ### 2. 입력 , 주문 버튼 동작
-  
+#### 1.입력버튼동작 : JTextField에 금액 입력
+   - String textFieldValue = jtf1.getText();//JTextField 입력값 저장
+#### 2.주문버튼동작 : 입력받은 금액 - 총금액
+   - 1. int[] oj= new int[4];//spinner입력값 저장하는 배열
+   - 2. oj[0] = Integer.parseInt(spin1.getModel().getValue().toString());//배열에 스피너 입력값 저장
+   - 3. for문 : 각 상품선택 개수 (각spinner입력값) * 각 상품가격 구해서 총 금액 계산
+   - 4. int Change: 거스름돈 전역변수 설정, int sum: 총금액 전역변수설정
+   - 5. Change= Integer.parseInt(textFieldValue) - sum;//입력받은금액-총금액 = 거스름돈
+   
 
 
 ### 3. 잔돈 버튼 동작
