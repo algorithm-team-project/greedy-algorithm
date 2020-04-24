@@ -13,11 +13,12 @@ public class test extends JFrame {
     Container ct = getContentPane();
     JFrame frame2 = new JFrame(); // 잔돈 frame
 
-    JPanel top = new JPanel(new GridLayout(1,1,10,10));
+
+
+    JPanel top = new JPanel(new GridLayout(1,1,10,10)); // 금액 입력 받는 상단 panel
     JLabel lb = new JLabel(" 금액 투입 " ,JLabel.CENTER);
     JButton input = new JButton("입 력");
     JTextField jtf1 = new JTextField();
-
 
     JPanel mj = new JPanel(new FlowLayout(FlowLayout.LEFT,35,60));
 
@@ -29,15 +30,17 @@ public class test extends JFrame {
     int money[] = {50000, 10000, 5000, 1000}; //지폐 종류
     int coin[] = {500, 100, 50, 10}; // 동전 종류
     int count = 0; //지폐 개수
-    int cnt = 0; // 동전 
+    int cnt = 0; // 동전
 
-    JPanel mid = new JPanel();
+
+    JPanel mid = new JPanel(); // 상품 보여 주는 중간 panel
     JButton pd[] = new JButton[4];
-    int price[] ={800,1300,900,1000};
+    int price[] ={1200 , 900 , 4500 , 2100}; // 상품 가격
 
-    JPanel bot = new JPanel();
 
-    JSpinner spinner;
+    JPanel bot = new JPanel(); // 수량 입력 하는 하단 panel
+
+    JSpinner spinner; // 수량 입력 받는 스피너 생성
     SpinnerNumberModel value1 = new SpinnerNumberModel(0,0,10,1);
     SpinnerNumberModel value2 = new SpinnerNumberModel(0,0,10,1);
     SpinnerNumberModel value3 = new SpinnerNumberModel(0,0,10,1);
@@ -47,17 +50,15 @@ public class test extends JFrame {
     JSpinner spin3 = new JSpinner(value3);
     JSpinner spin4 = new JSpinner(value4);
 
-
     JButton order = new JButton("주 문");
-    JButton cal = new JButton("잔 돈");
-
+    JButton cal = new JButton("계 산");
 
 
 
     public test(){
 
         setTitle("자판기");
-        setSize(550,500);
+        setSize(600,500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         setLocationRelativeTo(null);
@@ -84,20 +85,23 @@ public class test extends JFrame {
         input.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                textFieldValue = jtf1.getText();
+                    String textFieldValue = jtf1.getText();
+                if(textFieldValue.equals("")){
+                    JOptionPane.showMessageDialog(null,"돈을 입력하세요!","알림",JOptionPane.INFORMATION_MESSAGE);
+                } // 돈 입력 값이 없을 때 알림 메시지
+
+
             }
         }); // 입력 버튼 동작
 
-
         mid.setSize(400,200);
-        mid.setLocation(60,40);
         mid.setBackground(Color.white);
 
+        pd[0] = new JButton(new ImageIcon("src/images/milk.png"));
+        pd[1] = new JButton(new ImageIcon("src/images/water.png"));
+        pd[2] = new JButton(new ImageIcon("src/images/snack1.png"));
+        pd[3] = new JButton(new ImageIcon("src/images/snack2.png"));
 
-        pd[0] = new JButton(new ImageIcon("src/images/coffee.png"));
-        pd[1] = new JButton(new ImageIcon("src/images/cola.png"));
-        pd[2] = new JButton(new ImageIcon("src/images/milk.png"));
-        pd[3] = new JButton(new ImageIcon("src/images/water.png"));
 
 
 
@@ -105,6 +109,7 @@ public class test extends JFrame {
             pd[i].setBackground(Color.white);
             mid.add(pd[i]);
             mid.add(new JLabel(price[i]+"원"));
+
         }
 
 
@@ -120,19 +125,19 @@ public class test extends JFrame {
 
 
 
-        JLabel jl1 = new JLabel("커피");
+        JLabel jl1 = new JLabel("우유");
         jl1.setFont(f);
         bot.add(jl1); bot.add(spin1);
 
-        JLabel jl2 = new JLabel("콜라");
+        JLabel jl2 = new JLabel("생수");
         jl2.setFont(f);
         bot.add(jl2);    bot.add(spin2);
 
-        JLabel jl3 = new JLabel("우유");
+        JLabel jl3 = new JLabel("초코파이");
         jl3.setFont(f);
         bot.add(jl3);  bot.add(spin3);
 
-        JLabel jl4 = new JLabel("생수");
+        JLabel jl4 = new JLabel("포카칩");
         jl4.setFont(f);
         bot.add(jl4); bot.add(spin4);
 
@@ -141,8 +146,7 @@ public class test extends JFrame {
         order.setFont(f);
         cal.setFont(f);
 
-
-
+        // 스피너 인자값 받아 오기
         int[] oj= new int[4];
         Arrays.fill(oj, 0);
 
@@ -152,12 +156,13 @@ public class test extends JFrame {
         order.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                oj[0] = Integer.parseInt(spin1.getModel().getValue().toString());
-                oj[1] = Integer.parseInt(spin2.getModel().getValue().toString());
-                oj[2] = Integer.parseInt(spin3.getModel().getValue().toString());
-                oj[3] = Integer.parseInt(spin4.getModel().getValue().toString());
                 for(int i=0; i< pd.length ;i++)
                 {
+
+                    oj[0] = Integer.parseInt(spin1.getModel().getValue().toString());
+                    oj[1] = Integer.parseInt(spin2.getModel().getValue().toString());
+                    oj[2] = Integer.parseInt(spin3.getModel().getValue().toString());
+                    oj[3] = Integer.parseInt(spin4.getModel().getValue().toString());
 
                     if(oj[i]!=0)
                     {
@@ -165,9 +170,25 @@ public class test extends JFrame {
                         sum = sum + oj[i];
                     }
                 }
+                textFieldValue = jtf1.getText();
+                if (sum > Integer.parseInt(textFieldValue)) {
+                    int result = JOptionPane.showConfirmDialog(null, "돈이 부족합니다! 다시 시작하시겠습니까?", "알 림",JOptionPane.YES_NO_OPTION);
+                    // 입력 값이 계산 값 보다 적을 때 알림 메시지
+                    if(result == JOptionPane.YES_OPTION) {
+                        System.exit(JFrame.EXIT_ON_CLOSE); // 프레임을 종료
+                    } else if ((result == JOptionPane.NO_OPTION) || (result == JOptionPane.CLOSED_OPTION )) {
+                        return; // 아무 작업 없이 다이얼로그 상자 종료
+                    }
+
+
+                }else
+                    JOptionPane.showMessageDialog(null,"주문 되었습니다! 잔돈을 확인하세요!","알림",JOptionPane.INFORMATION_MESSAGE);
+
 
                 Change= Integer.parseInt(textFieldValue) - sum;
                 change = Change;
+
+
             }
         }); //주문 버튼 동작
 
@@ -219,7 +240,7 @@ public class test extends JFrame {
                 mj.add(jla3);
                 mj.add(b3);
             }
-        });// 잔돈 버튼 동작
+        }); //잔돈 버튼 동작
 
 
         ct.add(top,BorderLayout.NORTH);
