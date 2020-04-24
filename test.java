@@ -11,20 +11,29 @@ import java.util.Arrays;
 public class test extends JFrame {
 
     Container ct = getContentPane();
+    JFrame frame2 = new JFrame(); // 잔돈 frame
 
     JPanel top = new JPanel(new GridLayout(1,1,10,10));
     JLabel lb = new JLabel(" 금액 투입 " ,JLabel.CENTER);
     JButton input = new JButton("입 력");
     JTextField jtf1 = new JTextField();
+
+
+    JPanel mj = new JPanel(new FlowLayout(FlowLayout.LEFT,35,60));
+
+
     int sum;
     int change;
     String textFieldValue;
     int Change;
-
+    int money[] = {50000, 10000, 5000, 1000}; //지폐 종류
+    int coin[] = {500, 100, 50, 10}; // 동전 종류
+    int count = 0; //지폐 개수
+    int cnt = 0; // 동전 
 
     JPanel mid = new JPanel();
     JButton pd[] = new JButton[4];
-    int price[] ={ 800,1300,900,1000};
+    int price[] ={800,1300,900,1000};
 
     JPanel bot = new JPanel();
 
@@ -75,7 +84,7 @@ public class test extends JFrame {
         input.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String textFieldValue = jtf1.getText();
+                textFieldValue = jtf1.getText();
             }
         }); // 입력 버튼 동작
 
@@ -138,15 +147,15 @@ public class test extends JFrame {
         Arrays.fill(oj, 0);
 
 
+
+
         order.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
-                 oj[0] = Integer.parseInt(spin1.getModel().getValue().toString());
-                 oj[1] = Integer.parseInt(spin2.getModel().getValue().toString());
-                 oj[2] = Integer.parseInt(spin3.getModel().getValue().toString());
-                 oj[3] = Integer.parseInt(spin4.getModel().getValue().toString());
-
+                oj[0] = Integer.parseInt(spin1.getModel().getValue().toString());
+                oj[1] = Integer.parseInt(spin2.getModel().getValue().toString());
+                oj[2] = Integer.parseInt(spin3.getModel().getValue().toString());
+                oj[3] = Integer.parseInt(spin4.getModel().getValue().toString());
                 for(int i=0; i< pd.length ;i++)
                 {
 
@@ -158,13 +167,57 @@ public class test extends JFrame {
                 }
 
                 Change= Integer.parseInt(textFieldValue) - sum;
+                change = Change;
             }
         }); //주문 버튼 동작
 
         cal.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                frame2.setSize(600,200);
+                frame2.setTitle("잔 돈");
+                frame2.setVisible(true);
+                frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame2.setLocationRelativeTo(null);
+                frame2.add(mj);
+                frame2.setBackground(new Color(5,180,255));
+                mj.setBackground(new Color(255,255,255));
 
+                for(int i=0;i<money.length;i++){
+                    if(Change/money[i] == 0)
+                        Change = Change%money[i];
+                    else{
+                        count += Change/money[i];
+                        Change = Change%money[i];
+                    }
+                } // 지폐 개수 구하는 알고리즘
+                for(int i=0;i<coin.length;i++){
+                    if(Change/coin[i] == 0)
+                        Change = Change%coin[i];
+                    else{
+                        cnt += Change/coin[i];
+                        Change = Change%coin[i];
+                    }
+                } // 동전 개수 구하는 알고리즘
+                JLabel jla1 = new JLabel("잔 돈");
+                JButton b1 = new JButton(String.valueOf(change));
+                JLabel jla2 = new JLabel("지폐 개수");
+                JButton b2 = new JButton(String.valueOf(count));
+                JLabel jla3 = new JLabel("동전 개수");
+                JButton b3 = new JButton(String.valueOf(cnt));
+                jla1.setFont(f);
+                jla2.setFont(f);
+                jla3.setFont(f);
+                b1.setFont(f);
+                b2.setFont(f);
+                b3.setFont(f);
+                mj.add(jla1);
+                mj.add(b1);
+                mj.add(jla2);
+                mj.add(b2);
+                mj.add(jla3);
+                mj.add(b3);
             }
         });// 잔돈 버튼 동작
 
