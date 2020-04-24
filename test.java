@@ -137,15 +137,15 @@ public class test extends JFrame {
         int[] oj= new int[4];
         Arrays.fill(oj, 0);
 
-        oj[0] = Integer.parseInt(spin1.getModel().getValue().toString());
-        oj[1] = Integer.parseInt(spin2.getModel().getValue().toString());
-        oj[2] = Integer.parseInt(spin3.getModel().getValue().toString());
-        oj[3] = Integer.parseInt(spin4.getModel().getValue().toString());
-
 
         order.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                
+                 oj[0] = Integer.parseInt(spin1.getModel().getValue().toString());
+                 oj[1] = Integer.parseInt(spin2.getModel().getValue().toString());
+                 oj[2] = Integer.parseInt(spin3.getModel().getValue().toString());
+                 oj[3] = Integer.parseInt(spin4.getModel().getValue().toString());
 
                 for(int i=0; i< pd.length ;i++)
                 {
