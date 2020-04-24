@@ -29,6 +29,42 @@
 
 
 ### 3. 잔돈 버튼 동작
+### 
 
+``` java
+for(int i=0;i<money.length;i++){
+	if(Change/money[i] == 0)
+		Change = Change%money[i];
+	else{
+		count += Change/money[i];
+		Change = Change%money[i];
+	}
+}
+for(int i=0;i<coin.length;i++){
+	if(Change/coin[i] == 0)
+		Change = Change%coin[i];
+	else{
+		cnt += Change/coin[i];
+		Change = Change%coin[i];
+	}
+}
+```
+
+1. 첫번째 for 문 : 지폐의 개수를 계산 하는 부분(그리디 알고리즘)
+   - count += Change/money[i]; // 지폐 개수
+   - Change = Change%money[i]; //지폐개수를 파악하고 잔돈을 반환
+2. 두번째 for 문 : 동전의 개수를 계산 하는 부분(그리디 알고리즘)
+   - cnt += Change/coin[i]; // 동전 개수
+   - Change = Change%coin[i]; // 동전 개수를 파악하고 잔돈을 반환
+3. JLabel
+   - mj.add(jla1); // "잔 돈" JLabel
+   - mj.add(jla2); //  "지폐 개수" JLabel
+   - mj.add(jla3); // "동전 개수" JLabel
+4. JButton
+   - mj.add(b1); // 잔돈을 반환
+   - mj.add(b2); // 지폐 개수를 반환
+   - mj.add(b3); // 동전 개수를 반환
+5. frame2 : 거스름돈을 보여주는 frame
+   - mj JPanel을 frame에 추가
 
 ### 4. 디자인
